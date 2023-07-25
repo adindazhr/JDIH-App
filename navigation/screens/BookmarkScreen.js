@@ -8,7 +8,7 @@ export default function BookmarkScreen({navigation}) {
         <View style={styles.container}>
             <Header />
             
-            <Text style={{ paddingTop: 13, paddingLeft: 24, fontSize: 26, fontWeight: 'bold'}}>
+            <Text style={{ paddingTop: 13, paddingLeft: 24, fontSize: 24, color: '#3F1871', fontWeight: 'bold'}}>
                 Bookmark
             </Text>
 
