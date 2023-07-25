@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 
 const FlatButton = ({text}) => {
-  const onPress = () => console.log("pressed");
+  const onPress = () => console.log({text});
 
   return (
       <TouchableOpacity style={styles.button} onPress={onPress}>
@@ -11,14 +11,14 @@ const FlatButton = ({text}) => {
   );
 };
 
-const List = () => {
+const List = ({jenisHukum}) => {
   return (
   <View style={styles.list}>
     <Text style={styles.title}>Kategori</Text>
-    <FlatButton text='Category'/>
-    <FlatButton text='Category'/>
-    <FlatButton text='Category'/>
-    <FlatButton text='Category'/>
+    
+    {jenisHukum.map((jenis) => 
+      <FlatButton key={jenis.id }text={jenis.nama}/>)}
+      
   </View>
     
   );
