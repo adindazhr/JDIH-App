@@ -23,8 +23,8 @@ export default function MainContainer(){
         <NavigationContainer>
             <Tab.Navigator
                 initialRouteName={homeName}
-                activeColor="#fff"
-                inactiveColor="#fff"
+                activeColor="white"
+                inactiveColor="white"
                 screenOptions={({route}) => ({
                     tabBarIcon: ({focused, color, size}) => {
                         let iconName;

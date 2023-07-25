@@ -16,14 +16,12 @@ const Content = () => {
       <View style={styles.line} />
       <Text style={styles.date}>20 Juli 2023</Text>
     </View>
-
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#E9F1FF',
-    margin: 5,
     padding: 16,
     paddingHorizontal: 18,
     width: 240,

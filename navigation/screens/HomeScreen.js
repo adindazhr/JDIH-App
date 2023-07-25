@@ -1,60 +1,28 @@
 import React from 'react';
-import { useEffect,useState } from "react";
 import { StyleSheet, Text, View, Image } from 'react-native';
 import SearchBar from '../../components/SearchBar';
 import Content from '../../components/Content';
 import Header from '../../components/Header';
 
-const HomeScreen = ({navigation}) => {
-  const [peraturans, setPeraturan] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    fetch("https://jdih.dephub.go.id/api/get-peraturan?apiKey=qgI9KwT2Zz4QmX6igQeZaroYzHC9dwsDHkrmcHeoD4Br5kniajlm13c6MFuHblQAFq4FtvQ8GjvuGHlmZi")
-      .then((resp) => resp.json())
-      .then((json) => setPeraturan(json))
-      .catch((error) => console.error(error))
-      .finally(() => setLoading(false));
-  }, []);
-
-  return(
-      <View style={styles.container}>
-      {/*Header */}
+export default function HomeScreen({navigation}) {
+    return(
+        <View style={styles.container}>
+      {/*Hedaer */}
       <Header /> 
 
       {/* Search */}
-      <View style={styles.searchContainer}>
+      <View style={styles.search}>
 
         <Text style={styles.greetings}>Selamat Datang di JDIH{"\n"}Kementerian Perhubungan</Text>
-        <SearchBar/>
+        <SearchBar />
 
       </View>
       {/* <Section /> */}
-      {/* <Text style={styles.sectionTitle}>Peraturan Terbaru</Text>
-      <Text style={styles.sectionTitle}>Lainnya</Text>
       <Content/>
 
-      <Text style={styles.sectionTitle}>Peraturan Dicabut Terbaru</Text>
-      <Content/> */}
-
-      <View style={styles.container}>
-        {loading ? (
-          <Text>Loading...</Text>
-        ) : (
-          peraturans.map((post) => {
-            return (
-              <View>
-                <Text>{post.peraturans.judul}</Text>
-                <Text>{post.peraturans.body}</Text>
-              </View>
-            );
-          })
-        )}
-      </View>;
-
-      </View>
-  );
-};
+    </View>
+    )
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -62,7 +30,7 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff',
     },
   
-    searchContainer: {
+    search: {
       paddingVertical: 40,
       backgroundColor: '#3F1871',
       alignItems: 'center',
@@ -79,14 +47,15 @@ const styles = StyleSheet.create({
     },
   
     sectionTitle: {
-      fontSize: 16,
+      fontSize: 12,
       fontWeight: 'bold',
       color: '#3F1871',
-      margin: 10,
+      margin: 4,
     },
     items: {},
   
     header: {
+      // backgroundColor: '#fff',
       backgroundColor: '#D9D9D9',
       flexDirection: 'row',
       padding: 20,
@@ -97,8 +66,6 @@ const styles = StyleSheet.create({
       padding: 10,
       margin: 4,
     },
-    
+  
     
   });
-
-  export default HomeScreen;
