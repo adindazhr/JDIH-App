@@ -70,7 +70,10 @@ export default function MainContainer(){
     
     return(
         <NavigationContainer>
-            <RootStack.Navigator>
+            <RootStack.Navigator
+                screenOptions={({route}) => ({
+                    headerShown: false,
+                })}>
                 <RootStack.Screen name={homeName} component={TabBar} />
                 <RootStack.Screen name={categoryName} component={CategoryScreen} />
                 <RootStack.Screen name={bookmarkName} component={BookmarkScreen} />
