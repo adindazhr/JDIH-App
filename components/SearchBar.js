@@ -20,6 +20,15 @@ const styles = StyleSheet.create({
         borderRadius:50,
         width: 270,
         marginTop: 20,
+        borderWidth: 1.5,
+        shadowOffset: {
+            width: 0,
+            height: 2,
+          },
+          shadowOpacity: 0.25,
+          shadowRadius: 3.84,
+          elevation: 5,
+        
     },
     searchIcon: {
         padding: 10,
