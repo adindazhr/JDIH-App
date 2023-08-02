@@ -30,15 +30,16 @@ export default function HomeScreen({navigation}) {
 
         </View>
 
-        <Button
-          title = "Pindah ke search"
-          onPress={()=>navigation.navigate('Search')}
-        />
-
         <ScrollView style={styles.content} vertical showsVerticalScrollIndicator={false}>
-          <Text style={styles.sectionTitle}>Peraturan Terbaru</Text>
+          <View style={styles.sectionContainer}>
+            <Text style={styles.sectionTitle}>Peraturan Terbaru</Text>
+            <Text style={styles.lainnyaText} onPress={() => navigation.navigate('Search', {url: "&status=Berlaku"})}>lainnya</Text>
+          </View>
           <Content peraturan={peraturan} loading={loading}/>
-          <Text style={styles.sectionTitle}>Peraturan Dicabut Terbaru</Text>
+          <View style={styles.sectionContainer}>
+            <Text style={styles.sectionTitle}>Peraturan Dicabut Terbaru</Text>
+            <Text style={styles.lainnyaText} onPress={() => navigation.navigate('Search', {url: "&status=Dicabut"})}>lainnya</Text>
+          </View>
           <Content peraturan={peraturan} loading={loading}/>
         </ScrollView>
       </View>
@@ -47,50 +48,62 @@ export default function HomeScreen({navigation}) {
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#fff',
-    },
-  
-    searchContainer: {
-      paddingVertical: 40,
-      backgroundColor: '#3F1871',
-      alignItems: 'center',
-    },
-  
-    greetings: {
-      color: '#fff',
-      fontSize: 20,
-      fontWeight: 'bold',
-      textAlign: 'center',
-      textShadowColor: '#FCDB00',
-      textShadowOffset:{width: -1, height: 1},
-      textShadowRadius: 10,
-    },
-  
-    sectionTitle: {
-      fontSize: 20,
-      fontWeight: 'bold',
-      color: '#3F1871',
-      marginLeft: 10,
-    },
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
 
-    content: {
-      margin: 15,
-    },
-  
-    header: {
-      // backgroundColor: '#fff',
-      backgroundColor: '#D9D9D9',
-      flexDirection: 'row',
-      padding: 20,
-      alignItems: 'center',
-    },
-  
-    icon: {
-      padding: 10,
-      margin: 4,
-    },
+  searchContainer: {
+    paddingVertical: 40,
+    backgroundColor: '#3F1871',
+    alignItems: 'center',
+  },
+
+  sectionContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    marginHorizontal:10
+  },
+
+  lainnyaText: {
+    fontSize: 16,
+    color: '#3F1871',
+    textDecorationLine: 'underline'
+  },
+
+  greetings: {
+    color: '#fff',
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    textShadowColor: '#FCDB00',
+    textShadowOffset:{width: -1, height: 1},
+    textShadowRadius: 10,
+  },
+
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#3F1871',
+  },
+
+  content: {
+    margin: 15,
+  },
+
+  header: {
+    // backgroundColor: '#fff',
+    backgroundColor: '#D9D9D9',
+    flexDirection: 'row',
+    padding: 20,
+    alignItems: 'center',
+  },
+
+  icon: {
+    padding: 10,
+    margin: 4,
+  },
   
     
   });

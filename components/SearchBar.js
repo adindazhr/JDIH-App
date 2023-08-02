@@ -1,12 +1,27 @@
-import React from "react";
+import React, {useState}from "react";
 import { StyleSheet, TextInput, View } from "react-native";
-import Icon from 'react-native-vector-icons/Ionicons'
+import Icon from 'react-native-vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/native';
+
 
 export default function SearchBar() {
+    const [text, setText] = useState("");
+
+    const navigation = useNavigation();
+
+    const handleSubmit = () => {
+        console.log(text);
+        navigation.navigate('Search', {url: `&qq=${text}`})
+    }
+
     return (
         <View style={styles.searchSection}>
             <Icon style={styles.searchIcon} name="search" size={20} color="#3F1871"/>
-            <TextInput style={styles.input} placeholder='Cari Peraturan' underlineColorAndroid="transparent"/>
+            <TextInput style={styles.input} 
+            placeholder='Cari Peraturan' underlineColorAndroid="transparent" 
+            // value={text}
+            onChangeText={setText}
+            onSubmitEditing={handleSubmit}/>
         </View>
     );
 }
