@@ -19,7 +19,7 @@ export default function SearchBar() {
             <Icon style={styles.searchIcon} name="search" size={20} color="#3F1871"/>
             <TextInput style={styles.input} 
             placeholder='Cari Peraturan' underlineColorAndroid="transparent" 
-            // value={text}
+            value={text}
             onChangeText={setText}
             onSubmitEditing={handleSubmit}/>
         </View>

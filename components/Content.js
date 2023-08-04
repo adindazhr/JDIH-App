@@ -1,8 +1,12 @@
 import React from 'react';
-import { View, Text, StyleSheet,ScrollView  } from 'react-native';
+import { View, Text, StyleSheet,ScrollView, TouchableWithoutFeedback  } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/native';
 
 const Content = ({peraturan, loading}) => {
+
+  const navigation = useNavigation();
+
   return (
      <View>
         {loading ? (
@@ -11,13 +15,18 @@ const Content = ({peraturan, loading}) => {
           <ScrollView horizontal showsHorizontalScrollIndicator={false} >
             {peraturan.map((post) => {
             return (
+              <TouchableWithoutFeedback  onPress={()=>{navigation.navigate('Metadata', {data: post})}}>
                 <View key={post.idData} style={styles.container}>
                   <View style={styles.header}>
                     <Text style={styles.title} numberOfLines={1}>{post.noPeraturanFull}</Text>
                     <View style={styles.validText}>
-                    <Icon name={"checkmark-circle-outline"} color={"white"} size={18} marginVertical={1}/>
-                    {/* <Icon name={"close-circle-outline"} color={"white"} size={18} marginLeft={5} marginVertical={1}/> */}
-                    {/* <Text style={styles.sts}>{post.status}</Text> */}
+                    {post.status === 'Dicabut' ?  
+                    <View style={styles.dicabut}>
+                    <Icon name={"close-circle-outline"} color={"white"} size={18} marginLeft={5} marginVertical={1}/>
+                    </View>
+                    : <View style={styles.berlaku}>
+                    <Icon name={"checkmark-circle-outline"} color={"white"} size={18} marginLeft={5} marginVertical={1}/> 
+                    </View>}
                     </View>
                   </View>
                   <View style={styles.descriptionContainer}>
@@ -28,6 +37,7 @@ const Content = ({peraturan, loading}) => {
                   <View style={styles.line} />
                   <Text style={styles.date}>{post.tanggalPengundangan}</Text>
                 </View>
+              </TouchableWithoutFeedback>
             )
           })}
           </ScrollView>
@@ -65,9 +75,17 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
-  validText: {
+  berlaku: {
     flexDirection: 'row',
     backgroundColor: 'green',
+    paddingVertical: 4,
+    paddingHorizontal: 8,
+    color: '#fff',
+    borderRadius: 4,
+  },
+  dicabut: {
+    flexDirection: 'row',
+    backgroundColor: 'red',
     paddingVertical: 4,
     paddingHorizontal: 8,
     color: '#fff',

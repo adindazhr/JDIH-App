@@ -11,7 +11,7 @@ export default function SearchScreen({navigation, route}) {
     const [loading, setLoading] = useState(true);
     const [page, setPage] = useState(1);
     const [isFetching, setIsFetching] = useState(false);
-    const [totalPages, setTotalPages] = useState(0);
+    const [totalPages, setTotalPages] = useState(1);
     const [text, setText] = useState("");
   
     useEffect(() => {
@@ -25,6 +25,7 @@ export default function SearchScreen({navigation, route}) {
     }, [page]);
   
     const fetchData = () => {
+      setPage(1);
       fetchAndConcatData(page).then((result) => {
         setData(result.data);
         setTotalPages(result.totalPages);
@@ -47,37 +48,10 @@ export default function SearchScreen({navigation, route}) {
       }
     };
 
-    const handleSubmit = (pageNumber) => {
-      console.log(text);
-      return fetch(
-        `https://jdih.dephub.go.id/api/get-peraturan?apiKey=qgI9KwT2Zz4QmX6igQeZaroYzHC9dwsDHkrmcHeoD4Br5kniajlm13c6MFuHblQAFq4FtvQ8GjvuGHlmZi&page=${pageNumber}&qq=${text}`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.status === 'ok') {
-            return {
-              data: data.peraturans,
-              totalPages: data.totalPage || 1,
-            };
-          } else {
-            return {
-              data: [],
-              totalPages: 1,
-            };
-          }
-        })
-        .catch((error) => {
-          console.error('Error fetching data:', error);
-          return {
-            data: [],
-            totalPages: 1,
-          };
-        });
-  }
-  
     const fetchAndConcatData = (pageNumber) => {
+      const parameter = text ? `&qq=${text}`: `${route.params.url}`;
       return fetch(
-        `https://jdih.dephub.go.id/api/get-peraturan?apiKey=qgI9KwT2Zz4QmX6igQeZaroYzHC9dwsDHkrmcHeoD4Br5kniajlm13c6MFuHblQAFq4FtvQ8GjvuGHlmZi&page=${pageNumber}${route.params.url}`
+        `https://jdih.dephub.go.id/api/get-peraturan?apiKey=qgI9KwT2Zz4QmX6igQeZaroYzHC9dwsDHkrmcHeoD4Br5kniajlm13c6MFuHblQAFq4FtvQ8GjvuGHlmZi&page=${pageNumber}${parameter}`
       )
         .then((response) => response.json())
         .then((data) => {
@@ -118,9 +92,9 @@ export default function SearchScreen({navigation, route}) {
               <Icon style={styles.searchIcon} name="search" size={20} color="#3F1871"/>
               <TextInput style={styles.input} 
               placeholder='Cari Peraturan' underlineColorAndroid="transparent" 
-              // value={text}
+              value={text}
               onChangeText={setText}
-              onSubmitEditing={handleSubmit}
+              onSubmitEditing={fetchData}
               />
           </View>
         </View>
@@ -131,7 +105,7 @@ export default function SearchScreen({navigation, route}) {
           keyExtractor={(item, index) => index.toString()}
           onEndReached={handleLoadMore}
           onEndReachedThreshold={0.1}
-          ListFooterComponent={isFetching ? <ActivityIndicator size="large" color="#000" /> : null}
+          ListFooterComponent={isFetching ? <ActivityIndicator size="large" color="#000" /> : <Text>Tidak ada data peraturan </Text>}
         />
         </View>
       </View>

@@ -9,6 +9,8 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@config-plugins/react-native-blob-util": "^6.0.0",
+    "@config-plugins/react-native-pdf": "^6.0.0",
     "@react-navigation/bottom-tabs": "^6.5.8",
     "@react-navigation/native": "^6.1.7",
     "@react-navigation/stack": "^6.3.17",
@@ -23,9 +25,11 @@
     "react-native-feather": "^1.1.2",
     "react-native-grid-component": "^2.0.1",
     "react-native-ionicons": "^4.6.5",
+    "react-native-pdf": "^6.7.1",
     "react-native-svg": "13.9.0",
     "react-native-table-component": "^1.2.2",
-    "react-native-vector-icons": "^10.0.0"
+    "react-native-vector-icons": "^10.0.0",
+    "rn-fetch-blob": "^0.12.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

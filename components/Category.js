@@ -1,8 +1,16 @@
 import React, {useState} from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const FlatButton = ({text}) => {
-  const onPress = () => console.log({text});
+
+  const navigation = useNavigation();
+
+  const onPress = () => {
+    console.log({text});
+    navigation.navigate('Search', {url: ""});
+  }
+  
 
   return (
       <TouchableOpacity style={styles.button} onPress={onPress}>

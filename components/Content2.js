@@ -1,25 +1,41 @@
 import React from 'react';
-import { View, Text, StyleSheet,ScrollView  } from 'react-native';
+import { View, Text, StyleSheet,TouchableWithoutFeedback } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/native';
 
 const Content2 = ({peraturan}) => {
+
+  const navigation = useNavigation();
+
+  const handleClick = () => {
+    // console.log(peraturan.noPeraturanFull);
+    navigation.navigate('Metadata', {data: peraturan});
+  }
+
   return (
-    <View key={peraturan.idData} style={styles.container}>
-    <View style={styles.header}>
-      <Text style={styles.title} numberOfLines={1}>{peraturan.noPeraturanFull}</Text>
-      <View style={styles.validText}>
-      {peraturan.status === 'Dicabut' ? <Icon name={"close-circle-outline"} color={"white"} size={18} marginLeft={5} marginVertical={1}/> : <Icon name={"checkmark-circle-outline"} color={"white"} size={18} marginLeft={5} marginVertical={1}/> }
-      <Text style={styles.sts}>{peraturan.status}</Text>
-      </View>
+    <TouchableWithoutFeedback  onPress={handleClick}>
+        <View key={peraturan.idData} style={styles.container}>
+        <View style={styles.header}>
+          <Text style={styles.title} numberOfLines={1}>{peraturan.noPeraturanFull}</Text>
+          {peraturan.status === 'Dicabut' ?  
+          <View style={styles.dicabut}>
+          <Icon name={"close-circle-outline"} color={"white"} size={18} marginLeft={5} marginVertical={1}/>
+          <Text style={styles.sts}>{peraturan.status}</Text>
+          </View>
+          : <View style={styles.berlaku}>
+          <Icon name={"checkmark-circle-outline"} color={"white"} size={18} marginLeft={5} marginVertical={1}/> 
+          <Text style={styles.sts}>{peraturan.status}</Text>
+          </View>}
+        </View>
+        <View style={styles.descriptionContainer}>
+          <Text style={styles.description} numberOfLines={3}>
+            {peraturan.perihal}
+          </Text>
+        </View>
+        <View style={styles.line} />
+        <Text style={styles.date}>{peraturan.tanggalPengundangan}</Text>
     </View>
-    <View style={styles.descriptionContainer}>
-      <Text style={styles.description} numberOfLines={3}>
-        {peraturan.perihal}
-      </Text>
-    </View>
-    <View style={styles.line} />
-    <Text style={styles.date}>{peraturan.tanggalPengundangan}</Text>
-  </View>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -50,7 +66,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
-  validText: {
+  berlaku: {
     flexDirection: 'row',
     backgroundColor: 'green',
     paddingVertical: 4,

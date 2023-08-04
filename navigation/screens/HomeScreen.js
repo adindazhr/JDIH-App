@@ -33,7 +33,7 @@ export default function HomeScreen({navigation}) {
         <ScrollView style={styles.content} vertical showsVerticalScrollIndicator={false}>
           <View style={styles.sectionContainer}>
             <Text style={styles.sectionTitle}>Peraturan Terbaru</Text>
-            <Text style={styles.lainnyaText} onPress={() => navigation.navigate('Search', {url: "&status=Berlaku"})}>lainnya</Text>
+            <Text style={styles.lainnyaText} onPress={() => navigation.navigate('Search', {url: ""})}>lainnya</Text>
           </View>
           <Content peraturan={peraturan} loading={loading}/>
           <View style={styles.sectionContainer}>

@@ -1,36 +1,57 @@
 import React from "react";
-import { StyleSheet, Text, View } from 'react-native';
+import {ScrollView, StyleSheet, Text, View, Button, Linking } from 'react-native';
 
-const TableRow = ({ data, isEven }) => {
+const TableRow = ({ title, content, isEven }) => {
     const rowStyle = isEven ? styles.evenRow : styles.oddRow;
-  
+
     return (
       <View style={[styles.row, rowStyle]}>
         <View>
-        <Text style={styles.titleContent}>{data.column1}</Text>
-        <Text>{data.column2}</Text>
+        <Text style={styles.titleContent}>{title}</Text>
+        <Text>{content}</Text>
         </View>
       </View>
     );
   };
   
-  const Metadata = () => {
+  const Metadata = ({data}) => {
 
-    const tableData = [
-        { column1: 'Judul 1', column2: 'Data 1' },
-        { column1: 'Judul 2', column2: 'Data 2' },
-        { column1: 'Judul 3', column2: 'Data 3'},
-      ];
+    
+    const handlePress = () => {
+      Linking.openURL(data.urlDownloadPeraturan)
+      // console.log(data.urlDownloadPeraturan)
+    }
+
     return (
       <View style={styles.container}>
-
-        <Text style={styles.title}>Metadata</Text>
-
-        <View style={styles.table}>
-        {tableData.map((rowData, index) => (
-          <TableRow key={index} data={rowData} isEven={index % 2 === 0} />
-        ))}
+          <ScrollView vertical showsVerticalScrollIndicator={false}>
+          <Text style={styles.title}>Metadata</Text>
+          <View style={styles.table}>
+          <TableRow title="Tipe Dokumen" content={data.jenisDokumen} isEven={false}/>
+          <TableRow title="Judul" content={data.judul} isEven={true}/>
+          <TableRow title="Tajuk Entri Utama" content={data.teuBadan} isEven={false}/>
+          <TableRow title="Nomor Peraturan" content={data.noPeraturan} isEven={true}/>
+          <TableRow title="Jenis/Bentuk Peraturan" content={data.jenis} isEven={false}/>
+          <TableRow title="Singkatan Jenis/Bentuk Peraturan" content={data.singkatanJenis} isEven={true}/>
+          <TableRow title="Tempat Penetapan" content={data.tempatTerbit} isEven={false}/>
+          <TableRow title="Tanggal Penetapan" content={data.tanggalPengundangan} isEven={true}/>
+          <TableRow title="Lokasi" content={data.lokasi} isEven={false}/>
+          <TableRow title="Sumber" content={data.sumber} isEven={true}/>
+          <TableRow title="Bahasa" content={data.bahasa} isEven={false}/>
+          <TableRow title="Bidang Hukum" content={data.bidangHukum} isEven={true}/>
+          <TableRow title="Status" content={data.status} isEven={false}/>
+          <TableRow title="Subjek" content={data.subjek} isEven={true}/>
+          {/* <TableRow title="File" content={data.urlDownloadPeraturan} isEven={false}/> */}
+          <View style={[styles.row, styles.oddRow]}>
+            <View>
+            <Text style={styles.titleContent}>File</Text>
+            <View marginVertical={5} >
+              <Button title={data.namaFilePeraturan} onPress={handlePress}></Button>
+            </View>
+        </View>
       </View>
+      </View>
+      </ScrollView>
       </View>
     );
   };
@@ -68,11 +89,16 @@ const styles= StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 24,
         marginVertical: 10,
+        margin: 10,
       },
 
       titleContent: {
         fontWeight:'bold',
       },
+
+      space: {
+        margin: 5,
+      }
     
 });
 
